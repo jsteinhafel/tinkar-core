@@ -25,6 +25,8 @@ module dev.ikm.tinkar.provider.search {
     requires dev.ikm.tinkar.coordinate;
     requires org.eclipse.collections;
     requires org.apache.lucene.suggest;
+    requires dev.ikm.tinkar.common;
+    requires dev.ikm.tinkar.terms;
 
     exports dev.ikm.tinkar.provider.search;
 }
