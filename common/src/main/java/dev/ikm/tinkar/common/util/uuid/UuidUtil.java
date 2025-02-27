@@ -21,7 +21,6 @@ import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.list.MutableList;
 
-import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.util.*;
 
@@ -31,7 +30,6 @@ import java.util.*;
  * Various UUID related utilities.
  *
  * @author darmbrust
- *
  */
 public class UuidUtil {
     /**
@@ -44,6 +42,8 @@ public class UuidUtil {
      * The "nil" UUID, a special case, is the UUID 00000000-0000-0000-0000-000000000000; that is, all bits set to zero.[2]
      */
     public static final UUID NIL_UUID = UUID.fromString("00000000-0000-0000-0000-000000000000");
+
+    public static final UUID SNOMED_NAMESPACE = UUID.fromString("3094dbd1-60cf-44a6-92e3-0bb32ca4d3de");
 
     /**
      * Utility classes, which are collections of static members, are not meant to be instantiated.
@@ -240,11 +240,7 @@ public class UuidUtil {
     public static UUID fromSNOMED(String id) {
         final String name = "org.snomed." + id;
 
-        try {
-            return UUID.nameUUIDFromBytes(name.getBytes(ENCODING_FOR_UUID_GENERATION));
-        } catch (final UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
-        }
+        return UuidT5Generator.get(SNOMED_NAMESPACE, id);
     }
 
 }
